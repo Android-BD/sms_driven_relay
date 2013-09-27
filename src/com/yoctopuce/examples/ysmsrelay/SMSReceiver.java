@@ -25,7 +25,7 @@ public class SMSReceiver extends BroadcastReceiver{
                 //long when = message.getTimestampMillis();
                 String from = message.getOriginatingAddress();
                 if(!parseIncomingSMS(context, from, msg)){
-                    //this.abortBroadcast();
+                    this.abortBroadcast();
                 }
             }
         }
@@ -42,7 +42,7 @@ public class SMSReceiver extends BroadcastReceiver{
         //todo: use filter to accept connection from only one number
         //TODO: use custom prefix and save that in a settings files
 
-        String prefix = "yocto";
+        String prefix = "";
         if (prefix.length()>0) {
             if( !msg.startsWith(prefix))
                 return false;
@@ -50,8 +50,8 @@ public class SMSReceiver extends BroadcastReceiver{
         }
 
         String target = null;
-        Cmd cmd = Cmd.UNKNOWN;
-
+        Cmd cmd = Cmd.UNKNOWN;        
+        msg= msg.toLowerCase();
          if (msg.startsWith("toggle")) {
             target = msg.substring(6).trim();
             cmd = Cmd.TOGGLE;
