@@ -6,6 +6,8 @@
     <Switch android:id="@+id/switch_list_item_onoff"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
+              android:textOff="@string/off"
+              android:textOn="@string/on"             
               android:gravity="center"
               android:focusable="false"
               android:padding="4dp"
@@ -19,7 +21,6 @@
               android:textStyle="bold"
               android:paddingLeft="4dp"
               android:paddingRight="4dp"
-              android:text="Swich Name"
               android:layout_centerVertical="true"
               android:layout_alignParentLeft="true"
               />

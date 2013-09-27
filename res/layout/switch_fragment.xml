@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
@@ -25,38 +25,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/switch_status_label"
-        style="?android:listSeparatorTextViewStyle"
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left|center_vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
-        <TextView
-            android:id="@+id/switch_online_status"
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="@string/switch_unknow_status"
-            />
-
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/switch_test"
-            android:id="@+id/switch_test"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_gravity="left|center_vertical"
-            android:clickable="true"/>
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="@string/switch_configuration_label"
         style="?android:listSeparatorTextViewStyle"
         />
@@ -77,6 +45,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/switch_hardwareid"
+        	android:hint="@string/switch_hardwareid_hint"
             android:inputType="text"/>
     </LinearLayout>
 
@@ -84,9 +53,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/switch_inverted"
+        style="?android:textViewStyle"
+        android:textStyle="normal"
+        android:textColor="@android:color/secondary_text_dark"
         android:id="@+id/switch_inverted"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:textOn="@string/switch_inverted"
+        android:textOff="@string/switch_normal"
         android:layout_gravity="left|center_vertical"
         android:clickable="true"/>
 
@@ -103,7 +77,7 @@
             />
         <EditText
             android:id="@+id/switch_pulse"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_weight="1"
             android:gravity="right"
             android:layout_height="wrap_content"
