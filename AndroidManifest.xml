@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yoctopuce.examples.ysmsrelay"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-feature android:name="android.hardware.usb.host" />
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="16" />
+    <uses-permission
+        android:name="android.permission.RECEIVE_SMS"
+    />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/yoctorelay"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".SwitchListActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+            </intent-filter>
+            <meta-data
+            android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
+            android:resource="@xml/device_filter" />
+        </activity>
+        <activity
+            android:name=".SwitchActivitiy"
+            android:label="@string/app_name"
+            >
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value=".SwitchListActivity"/>
+            </activity>
+        <service android:name=".YoctoService" />
+        <receiver android:name=".SMSReceiver">
+        <intent-filter android:priority="100">
+            <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+        </intent-filter>
+    </receiver>
+    </application>
+
+</manifest>
