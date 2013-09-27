@@ -1,13 +1,9 @@
 package com.yoctopuce.examples.ysmsrelay;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import org.json.JSONException;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -21,8 +17,6 @@ public class SwitchStore {
     private ArrayList<YSwitch> mYSwitches;
     private Context mAppContext;
     private SwitchStoreJSONSerialiser mJSONSerialiser;
-
-    private BroadcastReceiver bcastReceiver = new YoctoUpdateReceiver();
 
     private SwitchStore(Context ctx) {
         mAppContext = ctx;

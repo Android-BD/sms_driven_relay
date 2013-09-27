@@ -15,7 +15,6 @@ public class YSwitch {
 
     private final static String JSON_FIELD_NAME = "NAME";
     private final static String JSON_FIELD_UUID = "UUID";
-    private final static String JSON_FIELD_STATE = "STATE";
     private final static String JSON_FIELD_INVERTED = "INVERTED";
     private final static String JSON_FIELD_PULSE = "PULSE";
     private final static String JSON_FIELD_HARDWAREID = "HARDWAREID";
@@ -27,7 +26,6 @@ public class YSwitch {
     private int mPulse;
     private String mHardwareId;
     private boolean mOnline;
-
 
     public YSwitch() {
         mUUID = UUID.randomUUID();
@@ -105,11 +103,8 @@ public class YSwitch {
             msgIntent.putExtra(YoctoService.PARAM_IN_PULSE_LEN,mPulse);
 
         }
-
         ctx.startService(msgIntent);
     }
-
-
 
     public void refrsh(Context ctx) {
         Intent msgIntent = new Intent(ctx, YoctoService.class);
@@ -117,10 +112,6 @@ public class YSwitch {
         msgIntent.putExtra(YoctoService.PARAM_IN_CMD, YoctoService.COMMANDS.REFRESH);
         ctx.startService(msgIntent);
     }
-
-
-
-
 
     @Override
     public String toString() {

@@ -1,6 +1,5 @@
 package com.yoctopuce.examples.ysmsrelay;
 
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -37,7 +36,7 @@ public class YoctoService extends NonStopIntentService implements YAPI.LogCallba
                 // register call back for anbuttons
                 if (fctName.startsWith("relay") ) {
                     YRelay yrelay = YRelay.FindRelay(fctFullName);
-                    Log.w(TAG, "value callback registerd for "+yrelay);
+                    Log.d(TAG, "value callback registerd for "+yrelay);
                     yrelay.registerValueCallback(this);
                     bcastRelayState(yrelay);
                 }
@@ -68,7 +67,7 @@ public class YoctoService extends NonStopIntentService implements YAPI.LogCallba
 
     @Override
     public void yNewValue(YRelay yRelay, String s) {
-        Log.w(TAG, "relay "+yRelay+" changed to "+s);
+        Log.d(TAG, "relay "+yRelay+" changed to "+s);
         bcastRelayState(yRelay);
     }
 
@@ -110,7 +109,6 @@ public class YoctoService extends NonStopIntentService implements YAPI.LogCallba
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        Log.i(TAG, "Received an intent: " + intent);
         String hwid;
         YRelay relay;
         COMMANDS cmd = (COMMANDS) intent.getSerializableExtra(PARAM_IN_CMD);
