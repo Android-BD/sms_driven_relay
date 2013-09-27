@@ -3,7 +3,6 @@ package com.yoctopuce.examples.ysmsrelay;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.yoctopuce.YoctoAPI.YAPI;
 import com.yoctopuce.YoctoAPI.YAPI_Exception;
@@ -27,8 +26,6 @@ public class YoctoService extends NonStopIntentService implements YAPI.LogCallba
     @Override
     public void yDeviceArrival(YModule module) {
         Log.d(TAG, "device Arrival" + module);
-        
-        Toast.makeText(this, module+" plugged", Toast.LENGTH_SHORT).show();
         try {
             int fctcount = module.functionCount();
             String fctName, fctFullName;
@@ -51,7 +48,7 @@ public class YoctoService extends NonStopIntentService implements YAPI.LogCallba
     @Override
     public void yDeviceRemoval(YModule module) {
         try {
-            Toast.makeText(this, module+" unplugged", Toast.LENGTH_SHORT).show();
+        	 
             int fctcount = module.functionCount();
             String fctName, fctFullName;
             for (int i = 0; i < fctcount; i++) {
@@ -177,6 +174,9 @@ public class YoctoService extends NonStopIntentService implements YAPI.LogCallba
                 controlBgThread(false);
                 break;
         }
+        if(mBgThreadUseCount==0){
+        	stopSelf();
+        }
     }
 
     private void controlBgThread(boolean start) {
@@ -215,8 +215,10 @@ public class YoctoService extends NonStopIntentService implements YAPI.LogCallba
 
     protected  void bcastRelayState(YRelay relay) {
         Intent bcastIntent = new Intent(YoctoUpdateReceiver.ACTION_RESP);
+        Log.d(TAG,"broacast change of relay "+relay);
         try {
             bcastIntent.putExtra(YoctoUpdateReceiver.PARAM_RELAY_HARDWAREID, relay.get_hardwareId());
+            Log.d(TAG,"...with hwid"+relay.get_hardwareId());
         } catch (YAPI_Exception e) {
             //serious error leave
             e.printStackTrace();
@@ -225,8 +227,10 @@ public class YoctoService extends NonStopIntentService implements YAPI.LogCallba
         try {
             boolean on = relay.get_state() == YRelay.OUTPUT_ON;
             bcastIntent.putExtra(YoctoUpdateReceiver.PARAM_RELAY_STATE, on);
+            Log.d(TAG,"...with on="+on);
             boolean online = relay.isOnline();
             bcastIntent.putExtra(YoctoUpdateReceiver.PARAM_RELAY_ONLINE,online);
+            Log.d(TAG,"...with online="+on);
         } catch (YAPI_Exception e) {
             bcastIntent.putExtra(YoctoUpdateReceiver.PARAM_RELAY_ONLINE,false);
         }

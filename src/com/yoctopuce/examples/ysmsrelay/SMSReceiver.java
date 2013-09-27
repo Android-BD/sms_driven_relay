@@ -22,7 +22,6 @@ public class SMSReceiver extends BroadcastReceiver{
                 messages[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
             for (SmsMessage message : messages) {
                 String msg = message.getMessageBody();
-                //long when = message.getTimestampMillis();
                 String from = message.getOriginatingAddress();
                 if(!parseIncomingSMS(context, from, msg)){
                     this.abortBroadcast();

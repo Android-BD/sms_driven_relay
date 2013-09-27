@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">Yoctopuce SMS Relay</string>
+    <string name="app_name">SMS Driven Relay</string>
     <string name="action_settings">Settings</string>
     <string name="new_switch">New Switch</string>
     <string name="name">Name</string>
@@ -11,13 +10,15 @@
     <string name="switch_name_hint">my Switch</string>
     <string name="switch_name_label">Name:</string>
     <string name="switch_inverted">Inverted</string>
+    <string name="switch_normal">Normal</string>
     <string name="switch_pulse_label">Pulse (in ms)</string>
     <string name="switch_pulse_hint">0</string>
     <string name="switch_hardwareid_label">Hardware Id</string>
-    <string name="switch_hardwareid_hint">RELAYHI1-1234.relay</string>
+    <string name="switch_hardwareid_hint">RELAYHI1–1234.relay</string>
     <string name="delete_switch">delete switch</string>
     <string name="switch_status_label">Status:</string>
     <string name="switch_unknow_status">Unknown</string>
     <string name="switch_test">Test:</string>
-
+    <string name="off">Off</string>
+    <string name="on">On</string>
 </resources>
