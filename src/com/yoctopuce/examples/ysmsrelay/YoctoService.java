@@ -27,6 +27,8 @@ public class YoctoService extends NonStopIntentService implements YAPI.LogCallba
     @Override
     public void yDeviceArrival(YModule module) {
         Log.d(TAG, "device Arrival" + module);
+        
+        Toast.makeText(this, module+" plugged", Toast.LENGTH_SHORT).show();
         try {
             int fctcount = module.functionCount();
             String fctName, fctFullName;
@@ -49,6 +51,7 @@ public class YoctoService extends NonStopIntentService implements YAPI.LogCallba
     @Override
     public void yDeviceRemoval(YModule module) {
         try {
+            Toast.makeText(this, module+" unplugged", Toast.LENGTH_SHORT).show();
             int fctcount = module.functionCount();
             String fctName, fctFullName;
             for (int i = 0; i < fctcount; i++) {
@@ -111,7 +114,8 @@ public class YoctoService extends NonStopIntentService implements YAPI.LogCallba
     protected void onHandleIntent(Intent intent) {
         String hwid;
         YRelay relay;
-        COMMANDS cmd = (COMMANDS) intent.getSerializableExtra(PARAM_IN_CMD);
+        COMMANDS cmd = (COMMANDS) intent.getSerializableExtra(PARAM_IN_CMD);      
+        //Toast.makeText(this, "Service: new Intent received " +cmd,Toast.LENGTH_SHORT ).show();
         if(cmd==null)
             return;
         switch (cmd) {
@@ -257,8 +261,6 @@ public class YoctoService extends NonStopIntentService implements YAPI.LogCallba
     }
 
 
-
-
     /*
      * some static helpers
      */
@@ -268,7 +270,6 @@ public class YoctoService extends NonStopIntentService implements YAPI.LogCallba
         i.putExtra(YoctoService.PARAM_IN_CMD, YoctoService.COMMANDS.GET_ALL_RELAY);
         ctx.startService(i);
         Log.d(TAG, "Request Relay list ");
-        Toast.makeText(ctx, "Request Relay list...",Toast.LENGTH_SHORT).show();
     }
 
     public static void requestRefresh(Context ctx) {
@@ -276,7 +277,6 @@ public class YoctoService extends NonStopIntentService implements YAPI.LogCallba
         Intent i = new Intent(ctx, YoctoService.class);
         i.putExtra(YoctoService.PARAM_IN_CMD, COMMANDS.REFRESH);
         ctx.startService(i);
-        Toast.makeText(ctx, "Request refresh of  list...",Toast.LENGTH_SHORT).show();
     }
 
 
