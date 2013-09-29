@@ -21,7 +21,7 @@ public class YoctoService extends NonStopIntentService implements YAPI.LogCallba
     public static final String PARAM_IN_PULSE_LEN     = "inPULSE_LEN";
     private final static String TAG = "YoctoService";
     private int mBgThreadUseCount =0;
-    private Thread mBgThread ;
+    private Thread mBgThread=null;
 
     @Override
     public void yDeviceArrival(YModule module) {
@@ -202,7 +202,9 @@ public class YoctoService extends NonStopIntentService implements YAPI.LogCallba
         }else{
             mBgThreadUseCount--;
             if(mBgThreadUseCount<=0){
-                mBgThread.interrupt();
+            	if(mBgThread!=null){
+            		mBgThread.interrupt();
+            	}
             }
         }
     }
