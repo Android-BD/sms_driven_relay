@@ -41,7 +41,6 @@ public class SwitchListFragment extends ListFragment {
         @Override
         protected void onSwitchChange(Context context, YSwitch s) {
             Log.w(TAG, "relay " + s.getHardwareId() + " changed ");
-
             ((SwitchAdapter)getListAdapter()).notifyDataSetChanged();
         }
     };
@@ -57,14 +56,24 @@ public class SwitchListFragment extends ListFragment {
 
 
 
+    @Override
     public void onStart() {
         super.onStart();
         getActivity().registerReceiver(mYoctoReceiver,
                 new IntentFilter(YoctoUpdateReceiver.ACTION_RESP));
-        YoctoService.requestRefresh(getActivity());
         YoctoService.startBgService(getActivity());
     }
+    
+    
     @Override
+	public void onResume() {
+		super.onResume();
+        YoctoService.requestRefresh(getActivity());
+	}
+
+
+
+	@Override
     public void onStop() {
         YoctoService.stopBgService(getActivity());
         getActivity().unregisterReceiver(mYoctoReceiver);
@@ -84,6 +93,7 @@ public class SwitchListFragment extends ListFragment {
         YSwitch ySwitch = (YSwitch) getListAdapter().getItem(position);
         Intent intent = new Intent(getActivity(),SwitchActivitiy.class);
         intent.putExtra(SwitchFragment.EXTRA_SWITCH_ID, ySwitch.getUUID());
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivityForResult(intent,0);
     }
 

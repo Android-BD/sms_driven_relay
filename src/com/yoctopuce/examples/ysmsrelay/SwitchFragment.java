@@ -17,6 +17,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -43,7 +44,14 @@ public class SwitchFragment extends Fragment {
                 mUsableRelay.add(relay);
             }
             mTextViewAdapter.notifyDataSetChanged();
+			//Toast.makeText(ctx,"new relay list of  "+Integer.toString(mUsableRelay.size())+" relay",Toast.LENGTH_SHORT).show();
         }
+
+		@Override
+		protected void onSwitchChange(Context ctx, YSwitch yswitch) {
+			//Toast.makeText(ctx,"Switch "+yswitch.getHardwareId()+" changed",Toast.LENGTH_SHORT).show();
+		}
+        
     };
     private ArrayAdapter<String> mTextViewAdapter;
 
